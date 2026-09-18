@@ -5,7 +5,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - "./:/var/www/html"
+      - "./src:/var/www/html"
       - "./.docker/apache/apache.conf:/etc/apache2/sites-enabled/000-default.conf"
 
   mariadb:
