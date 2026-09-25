@@ -6,8 +6,12 @@
 
     $router = new RouteCollector();
 
+    $router->get("/", function(){
+        return include "app/Views/frontend/index.php";
+    });
+
     $router->get("/admin", function(){
-        return "Estas intentando acceder a la funcion admin";
+        return include "app/Views/backend/admin.index.php";
     });
 
     $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
@@ -18,6 +22,4 @@
     }
 
     echo $response;
-
-    // include "app/Views/backend/index.html";
 ?>

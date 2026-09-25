@@ -1,6 +1,5 @@
 <?php
-    include_once "app/Views/backend/template/header.php";
-    include_once "app/Views/backend/template/sidebar.php";
-    include_once "app/Views/backend/template/main.title.php";
-    include_once "app/Views/backend/template/main.content.php";
-    include_once "app/Views/backend/template/footer.php";
+    include_once "app/Views/backend/template/admin-head.php";
+    include_once "app/Views/backend/template/admin-header.php";
+    include_once "app/Views/backend/template/admin-main.php";
+    include_once "app/Views/backend/template/admin-footer.php";
