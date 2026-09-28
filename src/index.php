@@ -7,12 +7,20 @@
     $router = new RouteCollector();
 
     $router->get("/", function(){
-        return include "app/Views/frontend/index.php";
+        include_once "app/Views/frontend/index.php";
     });
 
     $router->get("/admin", function(){
-        return include "app/Views/backend/admin.index.php";
+        include_once "app/Views/backend/admin.index.php";
     });
+
+
+    $router->get("/obtener-pass", function(){
+        include_once "ejemplos/funciones.php";
+        echo create_pass();
+    });
+
+
 
     $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
     try{
