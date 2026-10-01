@@ -20,6 +20,14 @@
         echo create_pass();
     });
 
+    $router->get("/rom/add",function(){
+        include_once "app/Views/backend/admin.game.new.php";
+    });
+    $router->post("/rom",function(){
+        var_dump($_POST);
+        var_dump($_FILES);
+    });
+
 
 
     $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
