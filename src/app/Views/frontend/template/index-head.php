@@ -13,47 +13,7 @@
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
           rel="stylesheet">
-    <style>@layer base {
-    html, body {
-        margin: 0;
-        padding: 0;
-    }
-
-        body {
-        overscroll-behavior: none;
-        }
-
-        main > :first-child {
-        margin-top: 0 !important;
-        }
-
-        main > :last-child {
-        margin-bottom: 0 !important;
-        }
-    }
-
-    ::-webkit-scrollbar {
-    display: none;
-}
-
-    .scanlines {
-    background: linear-gradient(rgba(18, 17, 35, 0) 50%, rgba(0, 0, 0, 0.35) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-        background-size: 100% 4px, 6px 100%;
-        pointer-events: none;
-    }
-
-    @keyframes blink {
-    0%, 49% {
-        opacity: 1;
-    }
-        50%, 100% {
-        opacity: 0;
-    }
-    }
-
-    .animate-cursor {
-    animation: blink 1s infinite;
-    }</style>
+    <link rel="stylesheet" href="app/Views/frontend/css/retroflix_global_styles.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script id="tailwind-config">tailwind.config = {
     darkMode: "class", theme: {

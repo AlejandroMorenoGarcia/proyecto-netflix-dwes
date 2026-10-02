@@ -26,6 +26,7 @@
     $router->post("/rom",function(){
         var_dump($_POST);
         var_dump($_FILES);
+        manageFiles($_FILES);
     });
 
 

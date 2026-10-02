@@ -1,0 +1,346 @@
+/* ==========================================================================
+   RETROFLIX — GLOBAL RETRO ARCADE 16-BIT STYLESHEET
+   Compatible with all Retroflix screens (Catalog, Colección, Arcade, Admin, etc.)
+   Palette: Dark Neon (#00f0ff Cyan, #ff2a85 Magenta, #ffd000 Gold, #00ff66 Mint)
+   Typography: Space Mono & Pixel Monospace
+   ========================================================================== */
+
+/* 1. Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Press+Start+2P&family=VT323&display=swap');
+
+/* 2. CSS Design Tokens / Custom Properties */
+:root {
+  /* Surface & Background Hierarchy */
+  --rf-bg-canvas: #090814;
+  --rf-surface-lowest: #0d0c1d;
+  --rf-surface-base: #121123;
+  --rf-surface-card: #17162b;
+  --rf-surface-elevated: #1f1d38;
+  --rf-surface-bright: #2d2a4a;
+
+  /* Neon Accent Palette */
+  --rf-neon-cyan: #00f0ff;
+  --rf-neon-cyan-glow: rgba(0, 240, 255, 0.45);
+  --rf-neon-magenta: #ff2a85;
+  --rf-neon-magenta-glow: rgba(255, 42, 133, 0.45);
+  --rf-neon-gold: #ffd000;
+  --rf-neon-gold-glow: rgba(255, 208, 0, 0.4);
+  --rf-neon-green: #00ff66;
+  --rf-neon-green-glow: rgba(0, 255, 102, 0.4);
+  --rf-neon-orange: #ff7700;
+
+  /* Text & Foreground */
+  --rf-text-primary: #f2f3f9;
+  --rf-text-secondary: #9d9bb0;
+  --rf-text-muted: #5e5c74;
+  --rf-text-disabled: #3d3b52;
+
+  /* Borders & Grids */
+  --rf-border-dim: #26243f;
+  --rf-border-subtle: #363359;
+  --rf-border-highlight: #4d497c;
+
+  /* Typography */
+  --rf-font-main: 'Space Mono', monospace;
+  --rf-font-pixel: 'Press Start 2P', monospace;
+  --rf-font-terminal: 'VT323', monospace;
+
+  /* Hardware CRT & Animation Speeds */
+  --rf-scanline-opacity: 0.18;
+  --rf-transition-fast: 120ms cubic-bezier(0.4, 0, 0.2, 1);
+  --rf-transition-bounce: 180ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 3. Base & Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: var(--rf-bg-canvas);
+  color: var(--rf-text-primary);
+  font-family: var(--rf-font-main);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  image-rendering: pixelated;
+  overflow-x: hidden;
+}
+
+/* 4. Global Scanline & CRT Vignette Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, var(--rf-scanline-opacity)) 50%
+  ),
+  radial-gradient(circle at center, transparent 65%, rgba(0, 0, 0, 0.6) 100%);
+  background-size: 100% 4px, 100% 100%;
+}
+
+/* 5. Custom 8-bit / Arcade Scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--rf-surface-lowest);
+  border-left: 1px solid var(--rf-border-dim);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--rf-surface-bright);
+  border: 1px solid var(--rf-neon-cyan);
+  box-shadow: inset 0 0 6px var(--rf-neon-cyan-glow);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--rf-neon-cyan);
+}
+
+/* 6. Typography & Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--rf-font-main);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fff;
+}
+
+.rf-title-glitch {
+  font-family: var(--rf-font-main);
+  font-weight: 700;
+  text-shadow: 2px 2px 0 var(--rf-neon-magenta), -2px -2px 0 var(--rf-neon-cyan);
+}
+
+.rf-pixel-text {
+  font-family: var(--rf-font-pixel);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.rf-terminal-text {
+  font-family: var(--rf-font-terminal);
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+}
+
+/* 7. Arcade Buttons & Action Elements */
+.rf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--rf-font-main);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.65rem 1.25rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all var(--rf-transition-fast);
+  text-decoration: none;
+  user-select: none;
+}
+
+/* Cyan Arcade Button (Primary) */
+.rf-btn-cyan {
+  background: var(--rf-neon-cyan);
+  color: #070913;
+  border-color: #ffffff;
+  box-shadow: 0 4px 0 #008f99, 0 0 16px var(--rf-neon-cyan-glow);
+}
+.rf-btn-cyan:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #008f99, 0 0 24px var(--rf-neon-cyan-glow);
+}
+.rf-btn-cyan:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #008f99, 0 0 8px var(--rf-neon-cyan-glow);
+}
+
+/* Magenta Arcade Button (Secondary / Hot) */
+.rf-btn-magenta {
+  background: var(--rf-neon-magenta);
+  color: #ffffff;
+  border-color: #ff94c2;
+  box-shadow: 0 4px 0 #990f48, 0 0 16px var(--rf-neon-magenta-glow);
+}
+.rf-btn-magenta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #990f48, 0 0 24px var(--rf-neon-magenta-glow);
+}
+.rf-btn-magenta:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #990f48;
+}
+
+/* Ghost / Terminal Button */
+.rf-btn-ghost {
+  background: rgba(23, 22, 43, 0.8);
+  color: var(--rf-text-secondary);
+  border: 1px solid var(--rf-border-subtle);
+}
+.rf-btn-ghost:hover {
+  color: var(--rf-neon-cyan);
+  border-color: var(--rf-neon-cyan);
+  box-shadow: 0 0 12px var(--rf-neon-cyan-glow);
+}
+
+/* 8. Arcade Cabinets & Cartridge Cards */
+.rf-card {
+  background: var(--rf-surface-card);
+  border: 1px solid var(--rf-border-dim);
+  position: relative;
+  transition: transform var(--rf-transition-fast), border-color var(--rf-transition-fast), box-shadow var(--rf-transition-fast);
+}
+
+.rf-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--rf-neon-cyan);
+  box-shadow: 0 8px 24px rgba(0, 240, 255, 0.15), 0 0 10px var(--rf-neon-cyan-glow);
+}
+
+/* Cartridge Notch / Bezel Header */
+.rf-card-header {
+  padding: 0.5rem 0.75rem;
+  background: var(--rf-surface-lowest);
+  border-bottom: 1px solid var(--rf-border-dim);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--rf-text-secondary);
+}
+
+/* 9. Badges, Indicators & HUD Tags */
+.rf-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+
+.rf-badge-cyan {
+  background: rgba(0, 240, 255, 0.15);
+  color: var(--rf-neon-cyan);
+  border: 1px solid var(--rf-neon-cyan);
+}
+
+.rf-badge-magenta {
+  background: rgba(255, 42, 133, 0.15);
+  color: var(--rf-neon-magenta);
+  border: 1px solid var(--rf-neon-magenta);
+}
+
+.rf-badge-gold {
+  background: rgba(255, 208, 0, 0.15);
+  color: var(--rf-neon-gold);
+  border: 1px solid var(--rf-neon-gold);
+}
+
+.rf-badge-green {
+  background: rgba(0, 255, 102, 0.15);
+  color: var(--rf-neon-green);
+  border: 1px solid var(--rf-neon-green);
+}
+
+/* 10. Arcade HUD Panels & Terminal Boxes */
+.rf-hud-panel {
+  background: var(--rf-surface-lowest);
+  border: 2px solid var(--rf-border-subtle);
+  position: relative;
+}
+
+.rf-hud-panel::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 10px;
+  right: 10px;
+  height: 2px;
+  background: var(--rf-neon-cyan);
+  box-shadow: 0 0 8px var(--rf-neon-cyan);
+}
+
+/* 11. Retro Form Controls & Inputs */
+.rf-input {
+  width: 100%;
+  background: var(--rf-surface-lowest);
+  border: 1px solid var(--rf-border-subtle);
+  color: var(--rf-neon-cyan);
+  font-family: var(--rf-font-main);
+  font-size: 0.85rem;
+  padding: 0.65rem 0.85rem;
+  outline: none;
+  transition: border-color var(--rf-transition-fast), box-shadow var(--rf-transition-fast);
+}
+
+.rf-input:focus {
+  border-color: var(--rf-neon-cyan);
+  box-shadow: 0 0 10px var(--rf-neon-cyan-glow);
+}
+
+.rf-input::placeholder {
+  color: var(--rf-text-muted);
+}
+
+/* 12. CRT & Retro Animations */
+@keyframes rf-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.rf-blink {
+  animation: rf-blink 1s infinite;
+}
+
+@keyframes rf-neon-pulse {
+  0%, 100% {
+    text-shadow: 0 0 4px var(--rf-neon-cyan), 0 0 12px var(--rf-neon-cyan-glow);
+  }
+  50% {
+    text-shadow: 0 0 8px var(--rf-neon-cyan), 0 0 24px var(--rf-neon-cyan-glow), 0 0 35px var(--rf-neon-cyan-glow);
+  }
+}
+
+.rf-neon-glow {
+  animation: rf-neon-pulse 2s infinite ease-in-out;
+}
+
+/* 13. High-Score Leaderboard Table */
+.rf-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.rf-table th {
+  background: var(--rf-surface-lowest);
+  color: var(--rf-text-secondary);
+  text-transform: uppercase;
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  border-bottom: 2px solid var(--rf-border-subtle);
+  font-size: 0.7rem;
+}
+
+.rf-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--rf-border-dim);
+}
+
+.rf-table tr:hover td {
+  background: rgba(0, 240, 255, 0.04);
+}
