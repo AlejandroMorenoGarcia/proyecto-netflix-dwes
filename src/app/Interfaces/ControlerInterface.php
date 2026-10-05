@@ -18,4 +18,5 @@ interface ControlerInterface
 
     //Eliminar un usuario
     public function delete(int $id);
+
 }
