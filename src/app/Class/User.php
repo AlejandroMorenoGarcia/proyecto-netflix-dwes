@@ -2,7 +2,7 @@
 
 namespace Ciclost\Proyecto1\Class;
 
-class User
+class User implements \JsonSerializable
 {
     private int $id;
     private string $name;
@@ -95,5 +95,10 @@ class User
     public function setUsedContent(array $usedContent): void
     {
         $this->usedContent = $usedContent;
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        // TODO: Implement jsonSerialize() method.
     }
 }

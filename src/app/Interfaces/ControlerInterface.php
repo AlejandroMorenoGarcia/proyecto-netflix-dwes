@@ -13,10 +13,14 @@ interface ControlerInterface
     //Crear un usuario
     public function create();
 
+    public function store();
+
     //Modificar un usuario
     public function update(int $id);
 
+    public function edit(int $id);
+
     //Eliminar un usuario
-    public function delete(int $id);
+    public function destroy(int $id);
 
 }
