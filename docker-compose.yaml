@@ -42,9 +42,9 @@ services:
       - proyecto1
     environment:
       MARIADB_ROOT_PASSWORD: toor
-      MARIADB_DATABASE: netflix
-      MARIADB_USER: alejandro
-      MARIADB_PASSWORD: alejandro
+      MARIADB_DATABASE: ${MARIADB_NAME:-proyecto}
+      MARIADB_USER: ${MARIADB_USER:-usuario}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD:-password}
     command:
       --default-authentication-plugin=mysql_native_password
 

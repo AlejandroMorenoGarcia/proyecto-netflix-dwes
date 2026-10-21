@@ -3,13 +3,21 @@
 namespace Ciclost\Proyecto1\Controllers;
 
 use Ciclost\Proyecto1\Interfaces\ControlerInterface;
+use Ciclost\Proyecto1\Models\UserModel;
 
 class UserController implements ControlerInterface
 {
 
     public function index()
     {
-        return "Hola";
+        // Nedesito preguntar al modelo y que me de un array con
+        // los objetos que representen todos los usuarios que hay en la BBDD
+
+        $usuarios=UserModel::getUsers();
+        // var_dump($usuarios);
+        // Tengo que crear una vista donde se mustre una
+        // tabla con todos los usuarios
+        include_once "app/Views/backend/admin.user.php";
     }
 
     public function show(int $id)
