@@ -104,13 +104,29 @@ class User implements \JsonSerializable
 
     public static function createFromArray(array $userData):User{
         $usuario = new User();
-        $usuario->setId($userData['id']);
+
+        if(isset($userData['id'])){
+            //Si el usuario se esta leyendo de la BBDD
+            $usuario->setId($userData['id']);
+        }
+        //Propiedades que se tienen que insertar
         $usuario->setName($userData['name']);
-        $usuario->setAddress($userData['address']);
-        $usuario->setPhone($userData['phone']);
-        $usuario->setBirthdate(\DateTime::createFromFormat('Y-m-d',$userData['birthdate']));
         $usuario->setPassword($userData['password']);
         $usuario->setEmail($userData['email']);
+
+        //Propiedades que pueden no insertarse
+        $usuario->setAddress($userData['address']??'');
+        $usuario->setPhone($userData['phone']??'');
+        if (isset($userData['birthdate'])) {
+            $usuario->setBirthdate(
+                \DateTime::createFromFormat(
+                    'Y-m-d', $userData['birthdate']));
+        }else{
+            $usuario->setBirthdate(
+                \DateTime::createFromFormat(
+                    'Y-m-d', '1900-01-01'));
+        }
+
         return $usuario;
     }
     

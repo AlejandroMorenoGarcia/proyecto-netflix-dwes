@@ -9,6 +9,7 @@
     "minimum-stability": "stable",
     "require": {
         "phroute/phroute": "*",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "respect/validation": "^2.5"
     }
 }
