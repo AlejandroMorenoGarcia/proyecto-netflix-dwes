@@ -1,20 +1,14 @@
 {
     "name": "ciclost/proyecto1",
-    "description": "proyecto",
-    "type": "project",
-    "license": "MIT",
+    "type": "proyect",
     "autoload": {
         "psr-4": {
             "Ciclost\\Proyecto1\\": "app/"
         }
     },
-    "authors": [
-        {
-            "name": "Alejandro"
-        }
-    ],
     "minimum-stability": "stable",
     "require": {
-        "phroute/phroute": "^2.2"
+        "phroute/phroute": "*",
+        "ext-pdo": "*"
     }
 }
