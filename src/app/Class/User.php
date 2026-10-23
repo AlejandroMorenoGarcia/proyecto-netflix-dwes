@@ -2,6 +2,9 @@
 
 namespace Ciclost\Proyecto1\Class;
 
+use Respect\Validation\Exceptions\NestedValidationException;
+use Respect\Validation\Validator as v;
+
 class User implements \JsonSerializable
 {
     private int $id;
@@ -108,10 +111,13 @@ class User implements \JsonSerializable
         if(isset($userData['id'])){
             //Si el usuario se esta leyendo de la BBDD
             $usuario->setId($userData['id']);
+            $usuario->setPassword($userData['password']);
+        }else{
+            $password_cifrado = password_hash($userData['password'],PASSWORD_DEFAULT);
+            $usuario->setPassword($password_cifrado);
         }
         //Propiedades que se tienen que insertar
         $usuario->setName($userData['name']);
-        $usuario->setPassword($userData['password']);
         $usuario->setEmail($userData['email']);
 
         //Propiedades que pueden no insertarse
@@ -137,5 +143,21 @@ class User implements \JsonSerializable
         }
         return $usuarios;
     }
+
+    public static function validateUserCreation(array $userData):array|true{
+        try{
+            v::key('name', v::stringType())->
+            key('address', v::stringType(),false)->
+            key('phone', v::stringType()->length(9,14),false)->
+            key('birthdate', v::date('Y-m-d'),false)->
+            key('password', v::stringType()->length(3,25))->
+            key('email', v::email())->
+            assert($_POST);
+        }catch (NestedValidationException $e){
+            return $e->getMessages();
+        }
+        return true;
+    }
+
 
 }

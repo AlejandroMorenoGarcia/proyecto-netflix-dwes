@@ -4,6 +4,10 @@
     use Phroute\Phroute\Exception\HttpRouteNotFoundException;
     use Phroute\Phroute\RouteCollector;
     use Ciclost\Proyecto1\Controllers\UserController;
+
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+    $dotenv->load();
+
     $router = new RouteCollector();
 
     $router->get('/register',[UserController::class, 'create']);

@@ -10,6 +10,7 @@
     "require": {
         "phroute/phroute": "*",
         "ext-pdo": "*",
-        "respect/validation": "^2.5"
+        "respect/validation": "^2.5",
+        "vlucas/phpdotenv": "^5.7"
     }
 }

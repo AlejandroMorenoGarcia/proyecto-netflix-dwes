@@ -41,24 +41,23 @@ class UserController implements ControlerInterface
     public function store()
     {
         //Recibir los datos que me llegan por el metodo POST
-        var_dump($_POST);
-        try{
-            v::key('name', v::stringType())->
-            key('address', v::stringType(),false)->
-            key('phone', v::stringType()->length(9,14),false)->
-            key('birthdate', v::date('Y-m-d'),false)->
-            key('password', v::stringType()->length(3,25))->
-            key('email', v::email())->
-            assert($_POST);
-        }catch (NestedValidationException $e){
-            $errores = $e->getMessages();
-            foreach ($errores as $error) {
+        //var_dump($_POST);
+        $validacion=User::validateUserCreation($_POST);
+        if ($validacion === true) {
+            $usuario = User::createFromArray($_POST);
+            //var_dump($usuario);
+
+            if (!UserModel::saveUser($usuario)){
+                return "Ha ocurrido un error de almacenamiento";
+            } else{
+                return "Se ha guardado";
+            }
+        }else{
+            foreach ($validacion as $error){
                 echo $error;
             }
         }
 
-        $usuario = User::createFromArray($_POST);
-        var_dump($usuario);
     }
 
     public function edit(int $id)
@@ -68,6 +67,22 @@ class UserController implements ControlerInterface
 
     public function destroy(int $id)
     {
-        return "Borrando usuario $id";
+        if(UserModel::deleteUser($id)){
+            http_response_code(200);
+            header('Content-Type: application/json');
+            return json_encode([
+                "error"=>false,
+                "menssage"=>"Usuario eliminado correctamente",
+                "code"=>200
+            ]);
+        }else{
+            http_response_code(404);
+            header('Content-Type: application/json');
+            return json_encode([
+                "error"=>true,
+                "menssage"=>"No se ha podido eliminar el usuario",
+                "code"=>404
+            ]);
+        }
     }
 }

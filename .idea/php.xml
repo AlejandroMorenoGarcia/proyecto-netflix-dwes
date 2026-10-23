@@ -17,6 +17,11 @@
       <path value="$PROJECT_DIR$/src/vendor/symfony/polyfill-mbstring" />
       <path value="$PROJECT_DIR$/src/vendor/respect/stringifier" />
       <path value="$PROJECT_DIR$/src/vendor/respect/validation" />
+      <path value="$PROJECT_DIR$/src/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/src/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/src/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/src/vendor/graham-campbell/result-type" />
+      <path value="$PROJECT_DIR$/src/vendor/phpoption/phpoption" />
     </include_path>
   </component>
   <component name="PhpStanOptionsConfiguration">
