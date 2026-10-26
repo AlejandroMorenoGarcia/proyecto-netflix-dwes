@@ -78,4 +78,60 @@ class UserModel
             return false;
         }
     }
+
+    public static function getUserById(int $idUser):User|false{
+        $conexion = "";
+        try {
+            $conexion= new PDO("mysql:host=mariadb;dbname=proyecto1","alejandro","alejandro");
+            $conexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        }catch (PDOException $e){
+            echo $e->getMessage();
+        }
+        $sql="SELECT * FROM users where id=:id";
+        $stmt=$conexion->prepare($sql);
+        $stmt->bindValue("id",$idUser);
+        $stmt->execute();
+        $resulrado = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($resulrado){
+            return User::createFromArray($resulrado);
+        }else {
+            return false;
+        }
+    }
+
+    public static function updateUser(User $user){
+        $conexion = "";
+        try {
+            $conexion = new PDO("mysql:host=mariadb;dbname=proyecto1",
+                "alejandro",
+                "alejandro");
+            $conexion->setAttribute(PDO::ATTR_ERRMODE,
+                PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        $sql = "UPDATE users SET address=:address,
+                 birthdate=STR_TO_DATE(:birthdate,'%Y-%m-%d'),
+                 email=:email,
+                 password=:password,
+                 phone=:phone,
+                 name=:name WHERE id=:id";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bindValue("id", $user->getId());
+        $stmt->bindValue("name", $user->getName());
+        $stmt->bindValue("address", $user->getAddress());
+        $stmt->bindValue("phone", $user->getPhone());
+        $stmt->bindValue("birthdate", $user->getBirthdate()->format('Y-m-d'));
+        $stmt->bindValue("password", $user->getPassword());
+        $stmt->bindValue("email", $user->getEmail());
+
+        $stmt->execute();
+        $resultado = $stmt->rowCount();
+        if (!$resultado) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }

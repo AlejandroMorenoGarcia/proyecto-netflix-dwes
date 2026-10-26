@@ -35,7 +35,20 @@ class UserController implements ControlerInterface
 
     public function update(int $id)
     {
-        return "Modificado usuario $id";
+        $datosAModificar=json_decode(file_get_contents("php://input"),true);
+        $datosAModificar['id']=$id;
+        $validacion = User::validateUserUpdate($datosAModificar);
+        $usuarioAntiguo = UserModel::getUserById($id);
+        if (!$usuarioAntiguo){
+            return "No se ha encontrado el usuario";
+        }else{
+            $usuarioNuevo = User::updateFromArray($usuarioAntiguo,$datosAModificar);
+            if (UserModel::updateUser($usuarioNuevo)){
+                return "Usuario modificado correctamente";
+            }else{
+                return "Error al modificar el usuario";
+            }
+        }
     }
 
     public function store()
