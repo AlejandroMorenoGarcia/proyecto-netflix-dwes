@@ -1,6 +1,8 @@
 <?php
-    include "app/Views/frontend/template/index-head.php";
-    include "app/Views/frontend/template/index-header.php";
-    include "app/Views/frontend/template/index-main.php";
-    include "app/Views/frontend/template/index-footer.php";
+    include "app/Views/frontend/template/head.php";
+    include "app/Views/frontend/template/header.php";
+    include "app/Views/frontend/template/search-bar.php";
+    include "app/Views/frontend/template/filters.php";
+    include "app/Views/frontend/template/featured-listings.php";
+    include "app/Views/frontend/template/footer.php";
 ?>
