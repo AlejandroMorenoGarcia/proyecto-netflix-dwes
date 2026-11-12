@@ -30,6 +30,7 @@ class UserController implements ControlerInterface
 
     public function create()
     {
+        //Revisar el codigo de Miguel Angel
         // TODO: Implement create() method.
     }
 

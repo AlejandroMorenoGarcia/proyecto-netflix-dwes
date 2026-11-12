@@ -99,6 +99,26 @@ class UserModel
         }
     }
 
+    public static function getUserByEmail(int $emailUser):User|false{
+        $conexion = "";
+        try {
+            $conexion= new PDO("mysql:host=mariadb;dbname=proyecto1","alejandro","alejandro");
+            $conexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        }catch (PDOException $e){
+            echo $e->getMessage();
+        }
+        $sql="SELECT * FROM users where email=:email";
+        $stmt=$conexion->prepare($sql);
+        $stmt->bindValue("email",$emailUser);
+        $stmt->execute();
+        $resulrado = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($resulrado){
+            return User::createFromArray($resulrado);
+        }else {
+            return false;
+        }
+    }
+
     public static function updateUser(User $user){
         $conexion = "";
         try {
